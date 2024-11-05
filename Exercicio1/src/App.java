@@ -1,3 +1,13 @@
+/*1. Sistema de Biblioteca com Polimorfismo
+Crie um sistema de biblioteca onde existam diferentes tipos de materiais: Livros, Revistas, e Artigos. 
+Cada material deve ter atributos comuns como título, autor e ano de publicação, mas os métodos como getResumo() 
+devem retornar informações específicas dependendo do tipo de material.
+Use polimorfismo para implementar esse comportamento.
+Adicione métodos para empréstimo e devolução, garantindo que um material não possa ser emprestado se já estiver 
+emprestado.*/
+
+
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
