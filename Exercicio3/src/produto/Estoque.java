@@ -2,6 +2,9 @@ package produto;
 import java.util.HashMap;
 import java.util.Map;
 
+import exception.EstoqueInsuficienteException;
+import exception.ProdutoNaoEncontradoException;
+
 public class Estoque {
     private Map<String, Produto> produtos;
 
@@ -21,27 +24,40 @@ public class Estoque {
     //função para remover um produto
     //remove é um método do hasmap que remove um par chave-valor do mapa.
     public void removeProduct(String code)throws exception.ProdutoNaoEncontradoException{
-        if(!produtos.containsKey(code)){
-            //throw new exception.ProdutoNaoEncontradoException("Produto nao econtrado, código: " + code);
-            System.out.println("Produto não encontrado!");
-        }else{
-            produtos.remove(code);
+        try{
+            if(!produtos.containsKey(code)){
+                throw new exception.ProdutoNaoEncontradoException("Produto nao econtrado, código: " + code);
+            }else{
+                produtos.remove(code);
+            }
+        }catch (ProdutoNaoEncontradoException e) {
+            // Aqui você trata a exceção e evita que o sistema pare
+            System.out.println(e.getMessage());
         }
     }
 
     //função para atualizar estoque dos produtos
     public void updateStock(String code, int qtd)throws exception.ProdutoNaoEncontradoException, exception.EstoqueInsuficienteException{
-        if(!produtos.containsKey(code)){
-            //throw new exception.ProdutoNaoEncontradoException("Produto nao econtrado, código: " + code);
-            System.out.println("Produto não encontrado!");
+        try{
+            if(!produtos.containsKey(code)){
+                throw new exception.ProdutoNaoEncontradoException("Produto nao econtrado, código: " + code);
+                
+            }
+            else if(produtos.get(code).getStockQt() + qtd < 0){
+                throw new exception.EstoqueInsuficienteException("Estoque insuficiente");
+            }
+            else{
+                produtos.get(code).setStockQt(qtd + produtos.get(code).getStockQt());
+            } 
         }
-        else if(produtos.get(code).getStockQt() + qtd < 0){
-            //throw new exception.EstoqueInsuficienteException("Estoque insuficiente");
-            System.out.println("Estoque Insuficiente!");
+        catch (ProdutoNaoEncontradoException e) {
+            // Tratamento da exceção de produto não encontrado
+            System.out.println(e.getMessage());
         }
-        else{
-            produtos.get(code).setStockQt(qtd + produtos.get(code).getStockQt());
-        }   
+        catch (EstoqueInsuficienteException e) {
+            // Tratamento da exceção de estoque insuficiente
+            System.out.println(e.getMessage());
+        } 
     }
 
     //funcao para listar todos os itens do estoque

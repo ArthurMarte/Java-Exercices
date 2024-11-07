@@ -35,6 +35,12 @@ public class App {
         aM.adicionarNota("Portugues", 4.5);
         aM.adicionarNota("Ingles", 5.5);
 
+        //Outra abordagem seria o aluno escolher as disciplinas matriculadss
+        /*AlunoMatematica aM = new AlunoMatematica("Jose", 3019, List.of(d1, d2));
+        // Adicionando notas para todas as disciplinas que José está cursando
+        aM.adicionarNota("Matematica", 9.5);
+        aM.adicionarNota("Fisica", 8.0); */
+
 
         AlunoProgramacao aP = new AlunoProgramacao("Arthur", 3042, todasDisciplinas);
         // Adicionando notas para todas as disciplinas que José está cursando
